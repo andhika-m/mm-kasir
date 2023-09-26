@@ -1,0 +1,17 @@
+{
+  "name": "mm-kasir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Andhika Malik",
+  "license": "ISC",
+  "dependencies": {
+    "@electron/remote": "^2.0.11",
+    "electron": "^26.2.2",
+    "imask": "^6.6.3",
+    "sqlite3": "^5.1.6"
+  }
+}
