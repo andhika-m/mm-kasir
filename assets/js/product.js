@@ -49,7 +49,10 @@ function loadProduct() {
       } else {
         rows.forEach( (row) => {
           tr += `<tr data-id=${row.id}>
-          <td>${row.id}</td>
+          <td data-colname="Id">
+            ${row.id}
+            <input type="checkbox" id="${row.id}" class="data-checkbox">
+          </td>
           <td>${row.product_name}</td>
           <td>${row.product_code}</td>
           <td>${row.barcode}</td>
@@ -60,7 +63,7 @@ function loadProduct() {
           <td>${row.product_initial_qty}</td>
           <td>
             <button class="btn btn-sm btn-light btn-light-bordered"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-sm btn-danger" onclick="deleteAction(${row.id}, '${row.product_name}')" id="delete-data"><i class="fa fa-trash"></i></button>
           </td>
           
           </tr>`
@@ -73,7 +76,7 @@ function loadProduct() {
 
 blankForm = () => {
   $('#product_name').val("")
-  $('#product_barsode').val("")
+  $('#product_barcode').val("")
   $('#product_price').val("")
   $('#product_cost').val("")
   $('#product_initial_qty').val("")
@@ -110,12 +113,54 @@ insertProduct = () => {
     })
   } else {
     db.serialize( () => {
-      db.run(`insert into products(product_name, barcode, category, selling_price, cost_of_product, product_initial_qty, unit) values('${prd_name}','${prd_barcode}','${prd_category}','${prd_price}','${prd_cost}','${prd_init_qty}','${prd_unit}')`, err => {
+      db.each(`select count(*) as row_number from products where product_name = '${prd_name}'`, (err, res) => {
         if(err) throw err
-        blankForm()
-        $('#product_name').focus()
-        load_data()
+        if(res.row_number < 1) {
+          db.run(`insert into products(product_name, barcode, category, selling_price, cost_of_product, product_initial_qty, unit) values('${prd_name}','${prd_barcode}','${prd_category}','${prd_price}','${prd_cost}','${prd_init_qty}','${prd_unit}')`, err => {
+            if(err) throw err
+            // generate kode produk secara otomatis
+            db.each(`select id from products where product_name = '${prd_name}'`, (err, row) => {
+              if (err) throw err
+              db.run (`update products set product_code = 'PR'||substr('000000'||${row.id},-6.6) where product_name = '${prd_name}'`, err =>{
+                if (err) throw err
+                blankForm()
+                $('#product_name').focus()
+                load_data()
+              })
+            })
+          })
+        } else {
+          dialog.showMessageBox({
+            title: 'Alert',
+            type: 'info',
+            message: 'Nama produk sudah ada dalam database, silahkan gunakan nama produk lain'
+          })
+        }
       })
     })
   }
+}
+
+loadCategoryOptions = () => {
+  db.all(`select * from categories order by id desc`, (err, rows) => {
+      if(err) throw err
+      let option = '<option value="">Kategori</option>'
+      rows.map( (row) => {
+          option+=`<option value="${row.category}">${row.category}</option>`
+      })
+      $('#product_category').html(option)
+  })
+}
+
+loadUnitOptions = () => {
+  db.all(`select * from units order by id desc`, (err, rows) => {
+      if (err) throw err
+      let option ='<option value="">Satuan</option>'
+      rows.map( (row) => {
+          option+=`<option value="${row.unit}">${row.unit}</option>`
+      })
+      console.log(option)
+
+      $('#product_unit').html(option)
+  })
 }

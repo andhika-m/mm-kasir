@@ -72,3 +72,11 @@
 #form-add-data.active {
   display: block;
 }
+
+tbody#data:hover {
+  cursor: pointer;
+}
+
+.blocked {
+  background-color: #ecf0f1;
+}

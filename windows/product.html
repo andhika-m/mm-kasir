@@ -56,7 +56,8 @@
                             <div class="col-auto">
                                 <button class="btn btn-sm btn-light btn-light-bordered" id="add-data"
                                     title="Tambah Data" onclick="openFormAddData()"><i class="fa fa-plus"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
+                                <button class="btn btn-sm btn-light btn-light-bordered" onclick="deleteAction()"
+                                    id="delete-multiple-data" data-bs-toggle="tooltip" title="Hapus"><i
                                         class="fa fa-trash"></i></button>
                                 <button class="btn btn-sm btn-light btn-light-bordered"><i
                                         class="fa fa-file-excel"></i></button>
@@ -64,10 +65,8 @@
                                         class="fa fa-file-pdf"></i></button>
                                 <button class="btn btn-sm btn-light btn-light-bordered"><i
                                         class="fa fa-print"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
-                                        class="fa fa-check"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
-                                        class="fa fa-times"></i></button>
+                                <button class="btn btn-sm btn-light btn-light-bordered" onclick="selectAll()" id="select-all" title="Select All"><i class="fa fa-check"></i></button>
+                                <button class="btn btn-sm btn-light btn-light-bordered" onclick="unSelectAll()" id="unselect-all" title="Unselect All"><i class="fa fa-times"></i></button>
                             </div>
 
                             <div class="col-auto">
