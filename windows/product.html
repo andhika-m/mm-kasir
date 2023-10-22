@@ -59,19 +59,16 @@
                                 <button class="btn btn-sm btn-light btn-light-bordered" onclick="deleteAction()"
                                     id="delete-multiple-data" data-bs-toggle="tooltip" title="Hapus"><i
                                         class="fa fa-trash"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
-                                        class="fa fa-file-excel"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
-                                        class="fa fa-file-pdf"></i></button>
-                                <button class="btn btn-sm btn-light btn-light-bordered"><i
-                                        class="fa fa-print"></i></button>
+                                <button class="btn btn-sm btn-light btn-light-bordered" title="Export CSV" onclick="exportData('csv')"><i class="fa fa-file-excel"></i></button>
+                                <button class="btn btn-sm btn-light btn-light-bordered" title="Export PDF" onclick="exportData('pdf')"><i class="fa fa-file-pdf"></i></button>
+                                <button class="btn btn-sm btn-light btn-light-bordered" title="Print Table" onclick="printData()"><i class="fa fa-print"></i></button>
                                 <button class="btn btn-sm btn-light btn-light-bordered" onclick="selectAll()" id="select-all" title="Select All"><i class="fa fa-check"></i></button>
                                 <button class="btn btn-sm btn-light btn-light-bordered" onclick="unSelectAll()" id="unselect-all" title="Unselect All"><i class="fa fa-times"></i></button>
                             </div>
 
                             <div class="col-auto">
                                 <select name="" id="row_per_page" class="form-select form-select-sm">
-                                    <option value="10">10</option>
+                                    <option value="2">2</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
@@ -168,6 +165,7 @@
         <div style="padding: 20px 20px 20px 20px">
             <div class="row">
                 <div class="col-xl-12">
+                    <div id="alert"></div>
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered" style="font-size: 13px">
                             <thead class="table-light" id="col-head">
