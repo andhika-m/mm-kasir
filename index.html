@@ -64,7 +64,7 @@
         <div class="d-flex justify-content-center mb-2">
             <div class="col-md-3 me-2">
                 <div class="box-menu">
-                    <a href="#" class="menu-link">
+                    <a href="#" onclick="cashier()" class="menu-link">
                         <img src="./assets/images/icons/lucuk/cashier-machine.png" alt="">
                     </a>
                     <div class="box-menu-title">Kasir</div>
@@ -120,6 +120,35 @@
 
         product = () => {
             ipcRenderer.send('load:product-window')
+        }
+
+        cashier = () => {
+            ipcRenderer.send('load:cashier-window')
+        }
+
+        salesData = () => {
+            ipcRenderer.send('load:sales-data-window')
+        }
+
+        salesReport = () => {
+            ipcRenderer.send('load:sales-report-window')
+        }
+
+        chart = () => {
+            ipcRenderer.send('load:chart-window')
+        }
+
+        buyer = () => {
+            ipcRenderer.send('load:buyer-window')
+        }
+        setting = (param) => {
+            ipcRenderer.send('load:setting', param)
+        }
+        winMinimize = () => {
+            ipcRenderer.send('window:minimize')
+        }
+        winClose = () => {
+            ipcRenderer.send('window:close')
         }
     </script>
 </body>
