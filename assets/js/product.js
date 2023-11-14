@@ -76,53 +76,52 @@ totalPrdPage = (total_row_displayed, searchVal) => {
 }
 
 function loadProduct(page_number, total_row_displayed, searchVal) {
-  let row_number
-  if(page_number < 2) {
-    row_number = 0
-  } else {
-    row_number = (page_number-1)*total_row_displayed
-  }
-  total_page(total_row_displayed, searchVal)
+    let row_number
+    if(page_number < 2) {
+        row_number = 0
+    } else {
+        row_number = (page_number-1)*total_row_displayed
+    }
+    total_page(total_row_displayed, searchVal)
 
-  let query
-  if(searchVal != "") {
-      query = `select * from products where product_name like '%${searchVal}%' escape '!' or product_code like '%${searchVal}%' escape '!' or barcode like '%${searchVal}%' escape '!' or category like '%${searchVal}%' escape '!' or selling_price like '%${searchVal}%' escape '!' or cost_of_product like '%${searchVal}%' escape '!' order by id desc limit ${row_number}, ${total_row_displayed}`
-  } else {
-      query = `select * from products order by id desc limit ${row_number}, ${total_row_displayed}`
-  }
-  
-  db.serialize( () => {
-    db.all(query, (err, rows) => {
-      if (err) throw err
-      let tr = ''
-      if (rows.length < 1) {
-        tr += ''
-      } else {
-        rows.forEach( (row) => {
-          tr += `<tr data-id=${row.id}>
-          <td data-colname="Id">
-            ${row.id}
-            <input type="checkbox" id="${row.id}" class="data-checkbox">
-          </td>
-          <td>${row.product_name}</td>
-          <td>${row.product_code}</td>
-          <td>${row.barcode}</td>
-          <td>${row.category}</td>
-          <td>${row.unit}</td>
-          <td>${row.selling_price}</td>
-          <td>${row.cost_of_product}</td>
-          <td>${row.product_initial_qty}</td>
-          <td>
-            <button class="btn btn-sm btn-light btn-light-bordered" onclick="editRecord(${row.id})" id="edit-data"><i class="fa fa-edit"></i></button>
-            <button class="btn btn-sm btn-danger" onclick="deleteAction(${row.id}, '${row.product_name}')" id="delete-data"><i class="fa fa-trash"></i></button>
-          </td>
-          
-          </tr>`
+    let query
+    if(searchVal != "") {
+        query = `select * from products where product_name like '%${searchVal}%' escape '!' or product_code like '%${searchVal}%' escape '!' or barcode like '%${searchVal}%' escape '!' or category like '%${searchVal}%' escape '!' or selling_price like '%${searchVal}%' escape '!' or cost_of_product like '%${searchVal}%' escape '!' order by id desc limit ${row_number}, ${total_row_displayed}`
+    } else {
+        query = `select * from products order by id desc limit ${row_number}, ${total_row_displayed}`
+    }
+
+    db.serialize( () => {
+        db.all(query, (err, rows) => {
+            if (err) throw err
+            let tr = ''
+            if(rows.length < 1) {
+                tr += ''
+            } else {
+                rows.forEach((row) => {
+                    tr+=`<tr data-id=${row.id}>
+                            <td data-colname="Id">
+                                ${row.id}
+                                <input type="checkbox" style="visibility:hidden" id="${row.id}" class="data-checkbox">
+                            </td>
+                            <td>${row.product_name}</td>
+                            <td>${row.product_code}</td>
+                            <td>${row.barcode}</td>
+                            <td>${row.category}</td>
+                            <td>${row.unit}</td>
+                            <td>${numberFormat(row.selling_price)}</td>
+                            <td>${numberFormat(row.cost_of_product)}</td>
+                            <td>${row.product_initial_qty}</td>
+                            <td>
+                                <button class="btn btn-sm btn-light btn-light-bordered" onclick="editRecord(${row.id})" id="edit-data"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteAction(${row.id}, '${row.product_name}')" id="delete-data"><i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>`
+                })
+            }
+            $('tbody#data').html(tr)
         })
-      }
-      $('tbody#data').html(tr)
     })
-  })
 }
 
 blankForm = () => {

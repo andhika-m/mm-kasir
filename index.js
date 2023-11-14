@@ -357,7 +357,7 @@ loadToPdf = (param1, param2, file_path, totalSales = false, docId = false, title
 
 }
 
-ipcMain.on('load:to-pdf', (e, msgThead, msgTbody, msgFilePath, msgTotalSales,  msgDocId, msgTitle) => {
+ipcMain.on('load:to-pdf', (e, msgThead, msgTbody, msgFilePath, msgTotalSales, msgDocId, msgTitle) => {
   loadToPdf(msgThead, msgTbody, msgFilePath, msgTotalSales, msgDocId, msgTitle)
 })
 
@@ -982,4 +982,33 @@ salesReportWin = () => {
 
 ipcMain.on('load:sales-report-window', () => {
   salesReportWin()
+})
+
+chartWin = () => {
+  const {width, height} = screen.getPrimaryDisplay().workAreaSize
+  chartWindow = new BrowserWindow(
+      {
+          webPreferences:
+          {
+              nodeIntegration: true,
+              contextIsolation: false
+          },
+          autoHideMenuBar: true,
+          width: width,
+          height: height,
+          title: 'My Cashier | Diagram Penjualan'
+      }
+  )
+  remote.enable(chartWindow.webContents)
+  chartWindow.loadFile('windows/chart.html')
+  chartWindow.webContents.on('did-finish-load', () => {
+      mainWindow.hide()
+  })
+  chartWindow.on('close', () => {
+      mainWindow.show()
+  })
+}
+
+ipcMain.on('load:chart-window', () => {
+  chartWin()
 })
