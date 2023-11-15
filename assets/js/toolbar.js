@@ -1,8 +1,15 @@
 openFormAddData = () => {
-  $(`#form-add-data`).addClass('active')
-  $(`#product_name`).focus()
-  loadCategoryOptions()
-  loadUnitOptions()
+    $('#form-add-data').addClass('active')
+    switch(doc_id) {
+        case 'product-data':
+            $('#product_name').focus()
+            loadCategoryOptions()
+            loadUnitOptions()
+            break
+        case 'buyer-data':
+            $('#buyer-name').focus()
+            break
+    }
 }
 
 closeFormAddData = () => {
