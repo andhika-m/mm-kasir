@@ -12,22 +12,23 @@
     <link rel="stylesheet" href="./../assets/css/main.css">
 </head>
 <body>
-    <div class="container">
-        <div class="row mt-2">
-            <div class="col-auto">
+    <div class="container" style="padding: 36px">
+        <div class="row" style="text-align: center">
+            <div class="col-center">
+                <div class="input-group mb-3">
+                    <h1>Login</h1>
+                </div>
                 <div class="input-group mb-2">
-                    <span class="input-group-text">@</span>
                     <input type="text" class="form-control form-control-sm" id="username" placeholder="Username" autofocus>
                 </div>
-                <div class="input-group mb-2">
-                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                <div class="input-group mb-2" style="padding-bottom: 14px;">
                     <input type="password" class="form-control form-control-sm" id="password" placeholder="Password">
                 </div>
+                <div class="separator-login mb-2" style="padding-bottom: 18px;""></div>
                 <div class="d-grid gap-2">
-                    <button class="btn btn-sm btn-primary" onclick="login()"><i class="fa fa-sign-in"></i> Login</button>
-                    <button class="btn btn-sm btn-light btn-light-bordered" onclick="closeApp()"><i class="fa fa-times"></i> Close</button>
+                    <button class="btn btn-sm btn-primary" onclick="login()"> Login</button>
+                    <button class="btn btn-sm btn-danger" onclick="closeApp()"> Close</button>
                 </div>
-
             </div>
         </div>
     </div>

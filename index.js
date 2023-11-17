@@ -79,8 +79,8 @@ modalLogin = () => {
           nodeIntegration: true,
           contextIsolation:false
       },
-      width: 250,
-      height: 180,
+      width: 320,
+      height: 340,
       parent: mainWindow,
       modal: true,
       autoHideMenuBar: true,
@@ -190,7 +190,7 @@ mainWin = () => {
       },
       height: 550,
       resizable: false,
-      title: 'My Cashier 1.0',
+      title: 'Malik Mart 1.0',
       autoHideMenuBar: true,
       frame: false
   })
@@ -224,7 +224,7 @@ mainWin = () => {
                                                   if(err) throw err
                                                   db.run(`CREATE TABLE units(id integer primary key autoincrement, unit varchar(20))`, err => {
                                                       if(err) throw err
-                                                      db.run(`insert into profil(store_name, logo) values('My Store','shop.png')`, err => {
+                                                      db.run(`insert into profil(store_name, logo) values('Malik Mart','shop.png')`, err => {
                                                           if(err) throw err
                                                           db.run(`insert into users(username, password, access_level, first_name, last_name) values('admin','admin','main_user','admin','satu')`, err => {
                                                               if(err) throw err
@@ -300,7 +300,7 @@ productWin = () => {
     autoHideMenuBar: true,
     width: width,
     height: height,
-    title: 'MM Kasir | Data Produk',
+    title: 'Malik Mart | Data Produk',
   })
 
   remote.enable(productWindow.webContents)
@@ -408,7 +408,7 @@ loadToPdf = (param1, param2, file_path, totalSales = false, docId = false, title
   db.all(`select * from profil order by id asc limit 1`, (err, row) => {
       if(err) throw err
       if(row.length < 1) {
-          titleObject.storeName = 'My Store',
+          titleObject.storeName = 'Malik Mart',
           titleObject.storeAddress = 'Address',
           titleObject.storeLogo = 'shop.png'
       } else {
@@ -485,7 +485,7 @@ loadPrintPage = (param1, param2, docId = false, title) => {
   db.all(`select * from profil order by id asc limit 1`, (err, row) => {
       if(err) throw err
       if(row.length < 1) {
-          titleObject.storeName = 'MM Kasir',
+          titleObject.storeName = 'Malik Mart',
           titleObject.storeAddress = 'Address',
           titleObject.storeLogo = 'shop.png'
       } else {
@@ -538,7 +538,7 @@ cashierWin = () => {
       autoHideMenuBar: true,
       width: 1200,
       height: 720,
-      title: 'My Cashier App || Cashier'
+      title: 'Malik Mart | Kasir'
   })
 
   cashierWindow.loadFile('windows/cashier.html')
@@ -1019,7 +1019,7 @@ salesWin = () => {
           autoHideMenuBar: true,
           width: width,
           height: height,
-          title: 'My Cashier | Data Penjualan'
+          title: 'Malik Mart | Data Penjualan'
       }
   )
   remote.enable(salesWindow.webContents)
@@ -1048,7 +1048,7 @@ salesReportWin = () => {
           autoHideMenuBar: true,
           width: width,
           height: height,
-          title: 'My Cashier | Laporan Penjualan'
+          title: 'Malik Mart | Laporan Penjualan'
       }
   )
   remote.enable(salesReportWindow.webContents)
@@ -1077,7 +1077,7 @@ chartWin = () => {
           autoHideMenuBar: true,
           width: width,
           height: height,
-          title: 'My Cashier | Diagram Penjualan'
+          title: 'Malik Mart | Diagram Penjualan'
       }
   )
   remote.enable(chartWindow.webContents)
@@ -1106,7 +1106,7 @@ buyerWin = () => {
           autoHideMenuBar: true,
           width: width,
           height: height,
-          title: 'My Cashier | Diagram Penjualan'
+          title: 'Malik Mart | Diagram Penjualan'
       }
   )
   remote.enable(buyerWindow.webContents)

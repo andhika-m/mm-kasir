@@ -1,5 +1,3 @@
-
-
 console.log("Pemanggilan IMask.js dilakukan");
 let inputPrdPrice = IMask(
   document.getElementById('product_price'),
