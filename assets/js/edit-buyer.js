@@ -1,5 +1,3 @@
-const { dialog, ipcRenderer } = require("electron")
-
 submitEditBuyerData = (buyerId) => {
   let name = $('#edit-form').find('#buyer-name').val()
   let prevName = $('#edit-form').find('#buyer-prev-name').val()
@@ -41,9 +39,16 @@ executeEditBuyerData = (buyerId) => {
   let telpTwo = $('#edit-form').find('#buyer-telp-two').val()
   let email = $('#edit-form').find('#buyer-email').val()
 
-  let query = `update buyer set name = '${name}', address = '${address}', website = '${website}', telp_one = '${telpOne}', telp_two = '${telpTwo}', email = '${email}' where id = ${buyerId}`
+  let query = `update buyers set name = '${name}', address = '${address}', website = '${website}', telp_one = '${telpOne}', telp_two = '${telpTwo}', email = '${email}' where id = ${buyerId}`
   db.run(query, err => {
     if(err) throw err
     ipcRenderer.send('update:success', doc_id)
   })
 }
+
+ipcRenderer.on('update:success', (e, msg) => {
+  alertSuccess(msg)
+  let pageNumber = $('#page_number').val()
+  let totalRowDisplayed = $('#row_per_page').val()
+  load_data(pageNumber, totalRowDisplayed)
+})

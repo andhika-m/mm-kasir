@@ -99,8 +99,8 @@ function loadProduct(page_number, total_row_displayed, searchVal) {
                 rows.forEach((row) => {
                     tr+=`<tr data-id=${row.id}>
                             <td data-colname="Id">
+                                <input type="checkbox" id="${row.id}" class="data-checkbox">
                                 ${row.id}
-                                <input type="checkbox" style="visibility:hidden" id="${row.id}" class="data-checkbox">
                             </td>
                             <td>${row.product_name}</td>
                             <td>${row.product_code}</td>
@@ -264,7 +264,7 @@ editPrdData = (id) => {
                                           <input type="hidden" value="${id}" id="rowId">
                                       </div>
                                       <div class="mb-3">
-                                          <input type="text" value="${row.barcode}" id="editPrdBarcode" placeholder="Barcode" class="form-control form-control-sm">
+                                          <input type="text" value="${row.barcode}" id="editPrdBarcode" placeholder="Barcode" class="form-control form-control-sm" readonly>
                                           <input type="hidden" value="${row.barcode}" id="prevPrdBarcode">
                                       </div>
                                       <div class="mb-3">

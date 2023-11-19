@@ -13,18 +13,18 @@ total_page = (total_row_displayed, searchVal = "") => {
 };
 
 load_data = (page_number, total_row_displayed, searchVal = "") => {
-	switch(doc_id) {
-			case 'product-data' :
-					loadProduct(page_number, total_row_displayed, searchVal);
-					break;
-			case 'sales' :
-					loadSales(page_number, total_row_displayed, searchVal)
-					break;
-			case 'buyer-data' :
-					loadBuyers(page_number, total_row_displayed, searchVal)
-					break;
+	switch (doc_id) {
+		case "product-data":
+			loadProduct(page_number, total_row_displayed, searchVal);
+			break;
+		case "sales":
+			loadSales(page_number, total_row_displayed, searchVal);
+			break;
+		case "buyer-data":
+			loadBuyers(page_number, total_row_displayed, searchVal);
+			break;
 	}
-}
+};
 
 let page_number = $("#page_number").val();
 let total_row_displayed = $("#row_per_page").val();

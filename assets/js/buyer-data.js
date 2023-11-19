@@ -47,8 +47,8 @@ function loadBuyers(page_number, total_row_displayed, searchVal) {
 				rows.forEach((row) => {
 					tr += `<tr data-id=${row.id}>
                           <td data-colname="Id">
-                              ${row.id}
-                              <input type="checkbox" style="visibility:hidden" id="${row.id}" class="data-checkbox">
+															<input type="checkbox" id="${row.id}" class="data-checkbox">
+															${row.id}
                           </td>
                           <td>${row.name}</td>
                           <td>${row.address}</td>
@@ -83,12 +83,12 @@ insertBuyer = () => {
 			required_array.push($(this).val());
 		}
 	});
-
+	console.log(required, required_array, required_array.length)
 	if (required_array.length < 4) {
 		dialog.showMessageBoxSync({
 			title: "Alert",
 			type: "info",
-			message: "Nama Buyer / Customer harus diisi",
+			message: "Nama, alamat, no telp 1 dan email, harus diisi",
 		});
 	} else {
 		db.serialize(() => {
